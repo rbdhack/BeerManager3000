@@ -31,7 +31,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <div className="home-page">
           <section className="beer-list-container">
             { beers && beers.map((beer, index) => {
-              return <BeersListItem index={index} favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beer} />;
+              return <BeersListItem favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beer} />;
             })}
           </section>
         </div>

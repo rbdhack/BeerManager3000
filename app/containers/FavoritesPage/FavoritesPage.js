@@ -12,6 +12,17 @@ import PropTypes from 'prop-types'
 export default class FavoritesPage extends React.Component {
   render() {
     const { beers, addToFavorites, favorites } = this.props;
+    if (favorites.length === 0) {
+      return (
+        <div className="card text-center">
+          <div className="card-body">
+            <h5 className="card-title">No beers selected as favorites</h5>
+            <p className="card-text">If you want to select a beer as favorite, go back to the beers list page and click the 'Add to Favorites' button</p>
+            <a href="/" className="btn btn-primary">Go to beers page</a>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <article>
@@ -22,7 +33,15 @@ export default class FavoritesPage extends React.Component {
         <div className="home-page">
           <section className="beer-list-container">
             { favorites && favorites.map((favorite, index) => {
-              return <BeersListItem index={index} isFavoriteItem={true} favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beers[favorite]} />;
+              /* find beer by id */
+              let favoriteBeer = {};
+              for (let i = 0; i<beers.length; i++) {
+                if (beers[i].id === favorite) {
+                  favoriteBeer = beers[i];
+                  break;
+                }
+              }
+              return <BeersListItem isFavoriteItem={true} favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...favoriteBeer} />;
             })}
           </section>
         </div>
