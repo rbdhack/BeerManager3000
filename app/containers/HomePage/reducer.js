@@ -1,15 +1,21 @@
-import { CHANGE_USERNAME } from './constants';
+import { ADD_TO_FAVORITES } from './constants';
 
 // The initial state of the App
 const initialState = {
-  username: '',
+  favorites: [],
 };
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_USERNAME:
-      // Delete prefixed '@' from the github username
-      return { ...state, username: action.name.replace(/@/gi, '') };
+    case ADD_TO_FAVORITES:
+      const newFavorites = state.favorites;
+      if (!newFavorites.includes(action.itemId)) {
+        newFavorites.push(action.itemId);
+      } else {
+        newFavorites.splice(newFavorites.indexOf(action.itemId), 1);
+      }
+      console.log(newFavorites);
+      return { ...state, favorites: [...newFavorites] };
     default:
       return state;
   }

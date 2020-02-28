@@ -11,24 +11,21 @@ import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
-import FeaturePage from 'containers/FeaturePage/Loadable';
+import FavoritesPage from 'containers/FavoritesPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import './style.scss';
+import 'bootstrap/dist/css/bootstrap.css';
+import BeerDetails from 'containers/BeerDetails/Loadable'
 
 const App = () => (
   <div className="app-wrapper">
-    <Helmet
-      titleTemplate="%s - React.js Boilerplate"
-      defaultTitle="React.js Boilerplate"
-    >
-      <meta name="description" content="A React.js Boilerplate application" />
-    </Helmet>
     <Header />
     <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route path="/features" component={FeaturePage} />
+      <Route path="/favorites" component={FavoritesPage} />
+      <Route path="/details/:id" component={BeerDetails} />
       <Route path="" component={NotFoundPage} />
     </Switch>
     <Footer />

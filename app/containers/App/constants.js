@@ -12,4 +12,10 @@
 export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
+export const LOAD_BEERS = 'boilerplate/App/LOAD_BEERS';
+export const LOAD_BEERS_SUCCESS = 'boilerplate/App/LOAD_BEERS_SUCCESS';
+export const LOAD_BEERS_ERROR = 'boilerplate/App/LOAD_BEERS_ERROR';
+export const LOAD_BEER_DETAILS = 'boilerplate/App/LOAD_BEERS';
+export const LOAD_BEER_DETAILS_SUCCESS = 'boilerplate/App/LOAD_BEER_DETAILS_SUCCESS';
+export const LOAD_BEER_DETAILS_ERROR = 'boilerplate/App/LOAD_BEER_DETAILS_ERROR';
 export const DEFAULT_LOCALE = 'en';

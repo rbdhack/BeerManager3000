@@ -5,11 +5,12 @@
 import {
   call, put, select, takeLatest
 } from 'redux-saga/effects';
+import config from '../../utils/config';
 import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
-
+import { reposLoaded, repoLoadingError, beersListLoaded, beersListLoadingError } from 'containers/App/actions';
 import request from 'utils/request';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
+import { LOAD_BEERS } from '../App/constants'
 
 /**
  * Github repos request/response handler
@@ -37,4 +38,20 @@ export default function* githubData() {
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(LOAD_REPOS, getRepos);
+  yield takeLatest(LOAD_BEERS, getBeersList);
+}
+
+/*
+  * Get a list of all beers
+ */
+export function* getBeersList() {
+  // Select username from store
+  const callURL = config.URL.APIRoot + config.URL.getBeers;
+  try {
+    // Call our request helper (see 'utils/request')
+    const beersList = yield call(request, callURL);
+    yield put(beersListLoaded(beersList));
+  } catch (err) {
+    yield put(beersListLoadingError(err));
+  }
 }

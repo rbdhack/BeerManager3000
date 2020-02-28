@@ -2,12 +2,15 @@ import { createSelector } from 'reselect';
 
 const selectHome = (state) => state.home;
 
-const makeSelectUsername = () => createSelector(
+const favorites = () => createSelector(
   selectHome,
-  (homeState) => homeState.username
+  (homeState) => {
+    let io = 1;
+   return homeState.favorites;
+  }
 );
 
 export {
   selectHome,
-  makeSelectUsername,
+  favorites,
 };

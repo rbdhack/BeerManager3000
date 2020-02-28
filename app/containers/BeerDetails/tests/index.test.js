@@ -6,9 +6,9 @@ import React from 'react';
 import { shallow, render } from 'enzyme';
 
 import ListItem from 'components/ListItem';
-import RepoListItem from '../RepoListItem';
+import BeerDetails from '../RepoListItem';
 
-const renderComponent = (props = {}) => render(<RepoListItem {...props} />);
+const renderComponent = (props = {}) => render(<BeerDetails {...props} />);
 
 describe.only('<RepoListItem />', () => {
   let item;
@@ -27,7 +27,7 @@ describe.only('<RepoListItem />', () => {
   });
 
   it('should render a ListItem', () => {
-    const renderedComponent = shallow(<RepoListItem item={item} />);
+    const renderedComponent = shallow(<BeerDetails item={item} />);
     expect(renderedComponent.find(ListItem).length).toBe(1);
   });
 

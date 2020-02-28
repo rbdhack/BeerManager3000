@@ -10,3 +10,4 @@
  */
 
 export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
+export const ADD_TO_FAVORITES = 'boilerplate/Home/ADD_TO_FAVORITES';

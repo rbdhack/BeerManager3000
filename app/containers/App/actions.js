@@ -15,11 +15,7 @@
  *    }
  */
 
-import {
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
-} from './constants';
+import * as actionTypes from './constants';
 
 /**
  * Load the repositories, this action starts the request saga
@@ -28,7 +24,7 @@ import {
  */
 export function loadRepos() {
   return {
-    type: LOAD_REPOS,
+    type: actionTypes.LOAD_REPOS,
   };
 }
 
@@ -42,7 +38,7 @@ export function loadRepos() {
  */
 export function reposLoaded(repos, username) {
   return {
-    type: LOAD_REPOS_SUCCESS,
+    type: actionTypes.LOAD_REPOS_SUCCESS,
     repos,
     username,
   };
@@ -57,7 +53,88 @@ export function reposLoaded(repos, username) {
  */
 export function repoLoadingError(error) {
   return {
-    type: LOAD_REPOS_ERROR,
+    type: actionTypes.LOAD_REPOS_ERROR,
+    error,
+  };
+}
+
+
+
+/**
+ * Load the list of beers from the API, this action starts the request saga
+ *
+ * @return {object} An action object with a type of LOAD_BEERS
+ */
+export function loadBeersList() {
+  return {
+    type: actionTypes.LOAD_BEERS,
+  };
+}
+
+/**
+ * Dispatched when the list of beers is loaded by the request saga
+ *
+ * @param  {array} beersList The repository data
+ *
+ * @return {object} An action object with a type of LOAD_BEERS_SUCCESS passing the repos
+ */
+export function beersListLoaded(beersList) {
+  return {
+    type: actionTypes.LOAD_BEERS_SUCCESS,
+    beersList,
+  };
+}
+
+/**
+ * Dispatched when loading the beers list fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of LOAD_BEERS_ERROR passing the error
+ */
+export function beersListLoadingError(error) {
+  return {
+    type: actionTypes.LOAD_BEERS_ERROR,
+    error,
+  };
+}
+
+/**
+ * Load the list of beers from the API, this action starts the request saga
+ *
+ * @return {object} An action object with a type of LOAD_BEER_DETAILS
+ */
+export function loadBeerDetails(beerId) {
+  return {
+    type: actionTypes.LOAD_BEER_DETAILS,
+    beerId
+  };
+}
+
+/**
+ * Dispatched when the list of beers is loaded by the request saga
+ *
+ * @param  {array} beersList The repository data
+ *
+ * @return {object} An action object with a type of LOAD_BEER_SUCCESS passing the repos
+ */
+export function beerDetailsLoaded(beerDetails) {
+  return {
+    type: actionTypes.LOAD_BEER_DETAILS_SUCCESS,
+    beerDetails,
+  };
+}
+
+/**
+ * Dispatched when loading the beers list fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of LOAD_BEERS_ERROR passing the error
+ */
+export function beerDetailsLoadingError(error) {
+  return {
+    type: actionTypes.LOAD_BEER_DETAILS_ERROR,
     error,
   };
 }

@@ -1,24 +1,15 @@
 /*
- * HomePage
+ * FeaturePage
  *
- * This is the first thing users see of our App, at the '/' route
+ * List all the features
  */
-
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import BeersListItem from '../../components/BeersListItem/BeersListItem';
 import './style.scss';
+import BeersListItem from '../../components/BeersListItem/BeersListItem'
+import PropTypes from 'prop-types'
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
-  componentDidMount() {
-    const { onSubmitForm } = this.props;
-    onSubmitForm();
-  }
-
+export default class FavoritesPage extends React.Component {
   render() {
     const { beers, addToFavorites, favorites } = this.props;
 
@@ -30,8 +21,8 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         </Helmet>
         <div className="home-page">
           <section className="beer-list-container">
-            { beers && beers.map((beer, index) => {
-              return <BeersListItem index={index} favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beer} />;
+            { favorites && favorites.map((favorite, index) => {
+              return <BeersListItem index={index} isFavoriteItem={true} favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beers[favorite]} />;
             })}
           </section>
         </div>
@@ -40,7 +31,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   }
 }
 
-HomePage.propTypes = {
+FavoritesPage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   beers: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),

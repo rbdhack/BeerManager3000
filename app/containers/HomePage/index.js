@@ -6,28 +6,30 @@ import injectSaga from 'utils/injectSaga';
 import {
   makeSelectRepos,
   makeSelectLoading,
-  makeSelectError
-} from 'containers/App/selectors';
-import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+  makeSelectError,
+  makeBeersList
+} from '../../containers/App/selectors';
+import { loadBeersList } from '../App/actions';
+import { addTofavorites } from './actions';
+import { favorites } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import HomePage from './HomePage';
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
   onSubmitForm: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-    dispatch(loadRepos());
-  }
+    dispatch(loadBeersList());
+  },
+  addToFavorites: (id) => dispatch(addTofavorites(id)),
 });
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
-  username: makeSelectUsername(),
+  favorites: favorites(),
   loading: makeSelectLoading(),
-  error: makeSelectError()
+  error: makeSelectError(),
+  beers: makeBeersList(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

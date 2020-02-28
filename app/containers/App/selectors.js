@@ -30,6 +30,16 @@ const makeSelectLocation = () => createSelector(
   (routeState) => routeState.location
 );
 
+const makeBeersList = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.beers
+)
+
+const makeBeerDetails = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.beerDetails
+)
+
 export {
   selectGlobal,
   makeSelectCurrentUser,
@@ -37,4 +47,6 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocation,
+  makeBeersList,
+  makeBeerDetails
 };

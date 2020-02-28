@@ -1,0 +1,36 @@
+.beer-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .card {
+    height: 20rem;
+    width: 20rem;
+    margin: 1rem;
+    .card-img {
+      max-width: 3rem;
+      max-height: 100%;
+      display: inline-block;
+      margin-bottom: 1rem;
+      vertical-align: top;
+    }
+    .card-right-content {
+      display: inline-block;
+      width: 13rem;
+      margin-left: 1rem;
+    }
+    .card-text {
+      width: 100%;
+      line-height: 1.2em;
+      height: 11.8rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 11;
+      font-size: 0.9rem;
+    }
+    .card-title {
+      display: inline-block;
+      font-size: 1rem;
+    }
+  }
+}
