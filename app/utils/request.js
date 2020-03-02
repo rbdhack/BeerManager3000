@@ -44,3 +44,10 @@ export default function request(url, options) {
     .then(checkStatus)
     .then(parseJSON);
 }
+
+export function setParams(params= {}, url) {
+  Object.keys(params).forEach((key) => {
+    url = url.replace('{:' + key + '}', params[key]);
+  });
+  return url;
+}

@@ -3,31 +3,13 @@
  */
 
 import {
-  call, put, select, takeLatest
+  call, put, takeLatest
 } from 'redux-saga/effects';
 import config from '../../utils/config';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError, beersListLoaded, beersListLoadingError } from 'containers/App/actions';
+import { beersListLoaded, beersListLoadingError } from 'containers/App/actions';
 import request from 'utils/request';
-import { makeSelectUsername } from 'containers/HomePage/selectors';
 import { LOAD_BEERS } from '../App/constants'
-
-/**
- * Github repos request/response handler
- */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(makeSelectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-
-  try {
-    // Call our request helper (see 'utils/request')
-    const repos = yield call(request, requestURL);
-    yield put(reposLoaded(repos, username));
-  } catch (err) {
-    yield put(repoLoadingError(err));
-  }
-}
+import { setParams } from '../../utils/request'
 
 /**
  * Root saga manages watcher lifecycle
@@ -37,20 +19,24 @@ export default function* githubData() {
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_REPOS, getRepos);
   yield takeLatest(LOAD_BEERS, getBeersList);
 }
 
 /*
   * Get a list of all beers
  */
-export function* getBeersList() {
+export function* getBeersList(action) {
+  const { pagination } = action;
+  let url = config.URL.getBeers;
+  if (pagination) {
+    url = setParams(pagination, config.URL.getBeersPage);
+  }
   // Select username from store
-  const callURL = config.URL.APIRoot + config.URL.getBeers;
+  const callURL = config.URL.APIRoot + url;
   try {
     // Call our request helper (see 'utils/request')
     const beersList = yield call(request, callURL);
-    yield put(beersListLoaded(beersList));
+    yield put(beersListLoaded(beersList, pagination));
   } catch (err) {
     yield put(beersListLoadingError(err));
   }

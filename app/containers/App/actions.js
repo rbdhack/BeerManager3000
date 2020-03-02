@@ -24,10 +24,10 @@ const { dispatch } = store;
  *
  * @return {object} An action object with a type of LOAD_BEERS
  */
-export function loadBeersList() {
-
+export function loadBeersList(pagination = false) {
   return dispatch({
     type: actionTypes.LOAD_BEERS,
+    pagination
   });
 }
 
@@ -38,10 +38,11 @@ export function loadBeersList() {
  *
  * @return {object} An action object with a type of LOAD_BEERS_SUCCESS passing the repos
  */
-export function beersListLoaded(beersList) {
+export function beersListLoaded(beersList, pagination) {
   return dispatch({
     type: actionTypes.LOAD_BEERS_SUCCESS,
     beersList,
+    pagination
   });
 }
 

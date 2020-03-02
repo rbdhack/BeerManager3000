@@ -30,11 +30,18 @@ const makeBeerDetails = () => createSelector(
   (globalState) => globalState.beerDetails
 )
 
+const pagination = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.pagination
+)
+
+
 export {
   selectGlobal,
   makeSelectLoading,
   makeSelectError,
   makeSelectLocation,
   makeBeersList,
-  makeBeerDetails
+  makeBeerDetails,
+  pagination
 };

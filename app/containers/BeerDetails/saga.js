@@ -9,6 +9,7 @@ import config from '../../utils/config';
 import {  beerDetailsLoaded, beerDetailsLoadingError } from 'containers/App/actions';
 import request from 'utils/request';
 import { LOAD_BEER_DETAILS } from '../App/constants'
+import { setParams } from '../../utils/request'
 
 /**
  * Root saga manages watcher lifecycle
@@ -19,13 +20,6 @@ export default function* githubData() {
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(LOAD_BEER_DETAILS, getBeerDetails);
-}
-
-function setParams(params= {}, url) {
-  Object.keys(params).forEach((key) => {
-    url = url.replace('{:' + key + '}', params[key]);
-  });
-  return url;
 }
 
 /*
