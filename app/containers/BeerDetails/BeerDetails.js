@@ -10,7 +10,13 @@ import { makeBeerDetails, makeSelectError, makeSelectLoading } from '../App/sele
 import { loadBeerDetails } from '../App/actions'
 import { addToFavorites } from '../HomePage/actions'
 import { favorites } from '../HomePage/selectors'
-
+const mapPropertiesToNames = {
+  'name': 'Beer Name:',
+  'tagline': 'Tagline:',
+  'first_brewed': 'First brewed at:',
+  'description': 'Description:',
+  'brewers_tips': 'Brewer Tips: '
+}
 export default class BeerDetails extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static mapSelectors () {
     return {
@@ -28,37 +34,35 @@ export default class BeerDetails extends React.PureComponent { // eslint-disable
 
   rederBeerDetailsTable() {
     const { beerDetails } = this.props
-    return (beerDetails && Object.keys(beerDetails)
+    return (beerDetails && Object.keys(mapPropertiesToNames)
       .map((key, index) => {
-        const beerDetailRow = beerDetails[key]
-        if (typeof beerDetailRow !== 'array' && typeof beerDetailRow !== 'object') {
           return (
-            <div key={'row' + index} className="row border-bottom">
-              <div className="col-2 font-weight-bold">
-                {key}
+            <div key={'row' + index} className="row bg-light">
+              <div className="col-3 font-weight-bold">
+                {mapPropertiesToNames[key]}
               </div>
-              <div className="col-6">
-                {beerDetailRow}
+              <div className="col-10">
+                {beerDetails[key]}
               </div>
             </div>)
-        } else {
-          return ''
-        }
       }));
   }
 
   render () {
     const { beerDetails, favoriteBeers } = this.props
+    const isFavoriteBeer = favoriteBeers && favoriteBeers.includes(beerDetails.id);
     return (
-      <div className="container border-dark bg-white shadow-sm">
+      <div className="container border-dark bg-light shadow-sm container px-lg-5">
+        <div className="col-3 font-weight-bold float-left">
+          <img src={beerDetails.image_url} className="col-4"/>
+        </div>
         {this.rederBeerDetailsTable()}
-        {beerDetails && <div className="row border-bottom">
-            <div className="card">
+        {beerDetails && <div className="row">
+            <div className="card bg-light border-0">
               <div className="card-body text-center">
-                {favoriteBeers && favoriteBeers.includes(beerDetails.id)  ? 'Favorite beer' :
-                  <button type="button" onClick={addToFavorites.bind(this, beerDetails.id)} className="btn btn-outline-success btn-sm">
-                    'Add to Favorites'
-                  </button>}
+                  <button data-toggle={isFavoriteBeer} type="button" onClick={addToFavorites.bind(this, beerDetails.id)} className="btn btn-outline-success btn-sm">
+                    {isFavoriteBeer ? 'Favorite' : 'Add to Favorites'}
+                  </button>
               </div>
             </div>
         </div>}
