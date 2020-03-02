@@ -8,8 +8,16 @@ import { Helmet } from 'react-helmet';
 import './style.scss';
 import BeersListItem from '../../components/BeersListItem/BeersListItem'
 import PropTypes from 'prop-types'
+import { favorites } from '../HomePage/selectors'
+import { makeBeersList } from '../App/selectors'
 
 export default class FavoritesPage extends React.Component {
+  static mapSelectors() {
+    return {
+      favorites: favorites(),
+      beers: makeBeersList(),
+    }
+  }
   render() {
     const { beers, addToFavorites, favorites } = this.props;
     if (favorites.length === 0) {

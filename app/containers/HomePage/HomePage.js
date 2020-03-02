@@ -9,18 +9,31 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import BeersListItem from '../../components/BeersListItem/BeersListItem';
 import './style.scss';
+import { makeBeersList, makeSelectError, makeSelectLoading, makeSelectRepos } from '../App/selectors'
+import { favorites } from './selectors'
+import { loadBeersList } from '../App/actions';
+import { addToFavorites } from './actions';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  static mapSelectors() {
+    return {
+      repos: makeSelectRepos(),
+      favorites: favorites(),
+      loading: makeSelectLoading(),
+      error: makeSelectError(),
+      beers: makeBeersList(),
+    }
+  }
+
   /**
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
-    const { onSubmitForm } = this.props;
-    onSubmitForm();
+    loadBeersList();
   }
 
   render() {
-    const { beers, addToFavorites, favorites } = this.props;
+    const { beers, favorites } = this.props;
 
     return (
       <article>
@@ -31,7 +44,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <div className="home-page">
           <section className="beer-list-container">
             { beers && beers.map((beer, index) => {
-              return <BeersListItem favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beer} />;
+              return <BeersListItem favorites={favorites} addToFavorites={addToFavorites} key={'beer-' + index} {...beer}/>;
             })}
           </section>
         </div>

@@ -14,33 +14,20 @@
  *        return { type: YOUR_ACTION_CONSTANT, var: var }
  *    }
  */
-
-import { CHANGE_USERNAME, ADD_TO_FAVORITES } from './constants';
-
-/**
- * Changes the input field of the form
- *
- * @param  {name} name The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_USERNAME
- */
-export function changeUsername(name) {
-  return {
-    type: CHANGE_USERNAME,
-    name
-  };
-}
+import store from '../../store';
+const { dispatch } = store;
+import { ADD_TO_FAVORITES } from './constants';
 
 /**
  * Changes the input field of the form
  *
- * @param  {name} name The new text of the input field
+ * @param  {itemId} Add to favorites item id
  *
- * @return {object}    An action object with a type of CHANGE_USERNAME
+ * @return {object}    An action object with a type of ADD_TO_FAVORITES
  */
-export function addTofavorites(itemId) {
-  return {
+export function addToFavorites(itemId) {
+  return dispatch({
     type: ADD_TO_FAVORITES,
     itemId
-  };
+  });
 }

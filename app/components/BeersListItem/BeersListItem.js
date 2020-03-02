@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './style.scss'
+import { addToFavorites } from '../../containers/HomePage/actions';
 
-const BeersListItem = ({ name, description, image_url, tagline, id, addToFavorites, favorites, isFavoriteItem }) => (
+const BeersListItem = ({ name, description, image_url, tagline, id, favorites, isFavoriteItem }) => (
   <div className="card shadow-sm mb-3">
     <div className="card-header bg-transparent font-weight-bold text-muted text-truncate">{name} {id}</div>
     <div className="card-body">

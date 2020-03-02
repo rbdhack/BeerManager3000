@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
-
+import store from './store';
 // Import root app
 import App from 'containers/App';
 
@@ -27,16 +27,12 @@ import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 // Import CSS reset and Global Styles
 import 'styles/theme.scss';
 
-import configureStore from './configureStore';
 
 // Import all initialization stuff
 import { registerOpenSans } from './init';
 
 registerOpenSans();
 
-// Create redux store with history
-const initialState = {};
-const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = () => {
