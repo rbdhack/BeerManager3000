@@ -72,6 +72,6 @@ export default class BeerDetails extends React.PureComponent { // eslint-disable
 }
 
 BeerDetails.propTypes = {
-  item: PropTypes.object,
-  currentUser: PropTypes.string,
+  beerDetails: PropTypes.object,
+  favoriteBeers: PropTypes.array,
 }

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import BeersListItem from '../../components/BeersListItem/BeersListItem';
 import './style.scss';
-import { makeBeersList, makeSelectError, makeSelectLoading, makeSelectRepos } from '../App/selectors'
+import { makeBeersList, makeSelectError, makeSelectLoading } from '../App/selectors'
 import { favorites } from './selectors'
 import { loadBeersList } from '../App/actions';
 import { addToFavorites } from './actions';
@@ -17,7 +17,6 @@ import { addToFavorites } from './actions';
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   static mapSelectors() {
     return {
-      repos: makeSelectRepos(),
       favorites: favorites(),
       loading: makeSelectLoading(),
       error: makeSelectError(),
@@ -57,5 +56,5 @@ HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   beers: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
+  favorites: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
 };

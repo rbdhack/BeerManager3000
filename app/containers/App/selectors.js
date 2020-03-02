@@ -5,11 +5,6 @@ const selectGlobal = (state) => state.global || initialState;
 
 const selectRoute = (state) => state.router;
 
-const makeSelectCurrentUser = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.currentUser
-);
-
 const makeSelectLoading = () => createSelector(
   selectGlobal,
   (globalState) => globalState.loading
@@ -18,11 +13,6 @@ const makeSelectLoading = () => createSelector(
 const makeSelectError = () => createSelector(
   selectGlobal,
   (globalState) => globalState.error
-);
-
-const makeSelectRepos = () => createSelector(
-  selectGlobal,
-  (globalState) => globalState.userData.repositories
 );
 
 const makeSelectLocation = () => createSelector(
@@ -42,10 +32,8 @@ const makeBeerDetails = () => createSelector(
 
 export {
   selectGlobal,
-  makeSelectCurrentUser,
   makeSelectLoading,
   makeSelectError,
-  makeSelectRepos,
   makeSelectLocation,
   makeBeersList,
   makeBeerDetails
